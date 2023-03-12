@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 
 
 app.get("/greeting", (req, res) => {
-    res.send('Express says hi!')
+     res.status(200).json({"greeting": "bonjour!!"})
 })
 
 
