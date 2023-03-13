@@ -9,7 +9,7 @@ import dotenv from 'dotenv'
 app.use(express.json())
 dotenv.config()
 //app.use(express.urlencoded({extended:false}))
-app.use(cors())
+app.use(cors({origin: ['http://localhost:3000', 'https://render-client-lalacat.onrender.com']}))
 
 
 app.get("/", (req, res) => {
