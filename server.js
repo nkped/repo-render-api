@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express()
-//import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import cors from 'cors'
 import dotenv from 'dotenv'
 
@@ -8,6 +8,18 @@ import dotenv from 'dotenv'
 //middleware
 app.use(express.json())
 dotenv.config()
+
+
+//datamodel
+const postSchema = mongoose.Schema({
+    title: String,
+    description: String
+})
+
+const Post = mongoose.model('post', postSchema)
+
+
+
 //app.use(express.urlencoded({extended:false}))
 app.use(cors({origin: ['http://localhost:3000', 'https://dep-lalacat-client.onrender.com']}))
 
@@ -20,6 +32,22 @@ app.get("/", (req, res) => {
 app.get("/greeting", (req, res) => {
      res.status(200).json({"greeting": "bonjour!!"})
 })
+
+app.get('/posts', (req, res) => {
+    Post.find({})
+    .then((items) => res.json(items))
+    .catch((err) => console.log(err))
+})
+
+//db
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+const db = mongoose.connection
+db.on('error', (error) => console.log(error))
+db.once('open', () => console.log('Database Connected...'))
 
 
 
