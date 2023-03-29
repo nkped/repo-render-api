@@ -18,11 +18,10 @@ const postSchema = mongoose.Schema({
 
 const Post = mongoose.model('post', postSchema)
 
-
-
+//needed on post/put for reading strings/arrays in req mess
 app.use(express.urlencoded({extended:false}))
 
-app.use(cors({origin: 'https://dep-lalacat-client.onrender.com',
+app.use(cors({origin: ['http://localhost:3000', 'https://dep-lalacat-client.onrender.com'],
 methods: ['GET', 'POST', 'PUT', 'DELETE'],
 allowedHeaders: ['Content-Type']
 }))
