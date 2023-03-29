@@ -20,8 +20,12 @@ const Post = mongoose.model('post', postSchema)
 
 
 
-//app.use(express.urlencoded({extended:false}))
-app.use(cors({origin: 'https://dep-lalacat-client.onrender.com'}))
+app.use(express.urlencoded({extended:false}))
+
+app.use(cors({origin: 'https://dep-lalacat-client.onrender.com',
+methods: ['GET', 'POST', 'PUT', 'DELETE'],
+allowedHeaders: ['Content-Type']
+}))
 
 
 app.get("/", (req, res) => {
